@@ -1,14 +1,23 @@
-name: Pre-commit check
+name: Pre-commit hooks
 
 on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
   pull_request:
-    types: [opened, reopened, synchronize, labeled]
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+concurrency:
+  group: pre-commit-${{github.event.pull_request.number || github.ref}}
+  cancel-in-progress: true
 
 jobs:
   lint:
     if: |
-      contains(github.event.pull_request.labels.*.name, 'Status: Pending Merge')
-    name: Checking if any fixes are needed
+      contains(github.event.pull_request.labels.*.name, 'Status: Pending Merge') ||
+      github.event_name != 'pull_request'
+    name: Check if fixes are needed
     runs-on: ubuntu-latest
     steps:
       - name: Checkout latest commit
@@ -19,6 +28,8 @@ jobs:
       - name: Set up Python 3
         uses: actions/setup-python@v5
         with:
+          cache-dependency-path: tools/pre-commit/requirements.txt
+          cache: 'pip'
           python-version: "3.x"
 
       - name: Get Python version hash
@@ -32,11 +43,10 @@ jobs:
         with:
           path: |
             ~/.cache/pre-commit
-            ~/.cache/pip
-          key: pre-commit|${{ env.PY_HASH }}|${{ hashFiles('.pre-commit-config.yaml', '.github/workflows/pre-commit.yml') }}
+          key: pre-commit-${{ env.PY_HASH }}-${{ hashFiles('.pre-commit-config.yaml', '.github/workflows/pre-commit.yml', 'tools/pre-commit/requirements.txt') }}
 
       - name: Install python dependencies
-        run: python -m pip install pre-commit docutils
+        run: python -m pip install -r tools/pre-commit/requirements.txt
 
       - name: Get changed files
         id: changed-files
@@ -52,11 +62,11 @@ jobs:
         with:
           path: |
             ~/.cache/pre-commit
-            ~/.cache/pip
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
 
       - name: Push changes using pre-commit-ci-lite
         uses: pre-commit-ci/lite-action@v1.0.2
-        if: always()
+        # Only push changes in PRs
+        if: ${{ always() && github.event_name == 'pull_request' }}
         with:
           msg: "ci(pre-commit): Apply automatic fixes"

@@ -3,8 +3,7 @@
 #include <Print.h>
 
 //Default constructor, blank mac address.
-MacAddress::MacAddress()
-  : MacAddress(MAC6) {}
+MacAddress::MacAddress() : MacAddress(MAC6) {}
 
 MacAddress::MacAddress(MACType mac_type) {
   _type = mac_type;
@@ -68,12 +67,12 @@ bool MacAddress::fromString(const char *buf) {
 
 //Parse user entered string into MAC address
 bool MacAddress::fromString6(const char *buf) {
-  char cs[18];
+  char cs[18];  // 17 + 1 for null terminator
   char *token;
   char *next;  //Unused but required
   int i;
 
-  strncpy(cs, buf, sizeof(cs));  //strtok modifies the buffer: copy to working buffer.
+  strncpy(cs, buf, sizeof(cs) - 1);  //strtok modifies the buffer: copy to working buffer.
 
   for (i = 0; i < 6; i++) {
     token = strtok((i == 0) ? cs : NULL, ":");  //Find first or next token
@@ -87,12 +86,12 @@ bool MacAddress::fromString6(const char *buf) {
 }
 
 bool MacAddress::fromString8(const char *buf) {
-  char cs[24];
+  char cs[24];  // 23 + 1 for null terminator
   char *token;
   char *next;  //Unused but required
   int i;
 
-  strncpy(cs, buf, sizeof(cs));  //strtok modifies the buffer: copy to working buffer.
+  strncpy(cs, buf, sizeof(cs) - 1);  //strtok modifies the buffer: copy to working buffer.
 
   for (i = 0; i < 8; i++) {
     token = strtok((i == 0) ? cs : NULL, ":");  //Find first or next token
@@ -118,14 +117,12 @@ void MacAddress::toBytes(uint8_t *buf) {
 //MAC: Buffer must be at least 18 chars
 int MacAddress::toString(char *buf) {
   if (_type == MAC6) {
-    return sprintf(buf, "%02X:%02X:%02X:%02X:%02X:%02X",
-                   _mac.bytes[0], _mac.bytes[1], _mac.bytes[2],
-                   _mac.bytes[3], _mac.bytes[4], _mac.bytes[5]);
+    return sprintf(buf, "%02X:%02X:%02X:%02X:%02X:%02X", _mac.bytes[0], _mac.bytes[1], _mac.bytes[2], _mac.bytes[3], _mac.bytes[4], _mac.bytes[5]);
   } else {
-    return sprintf(buf, "%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X",
-                   _mac.bytes[0], _mac.bytes[1], _mac.bytes[2],
-                   _mac.bytes[3], _mac.bytes[4], _mac.bytes[5],
-                   _mac.bytes[6], _mac.bytes[7]);
+    return sprintf(
+      buf, "%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X", _mac.bytes[0], _mac.bytes[1], _mac.bytes[2], _mac.bytes[3], _mac.bytes[4], _mac.bytes[5], _mac.bytes[6],
+      _mac.bytes[7]
+    );
   }
 }
 
@@ -133,14 +130,12 @@ String MacAddress::toString() const {
   uint8_t bytes = (_type == MAC6) ? 18 : 24;
   char buf[bytes];
   if (_type == MAC6) {
-    snprintf(buf, sizeof(buf), "%02X:%02X:%02X:%02X:%02X:%02X",
-             _mac.bytes[0], _mac.bytes[1], _mac.bytes[2],
-             _mac.bytes[3], _mac.bytes[4], _mac.bytes[5]);
+    snprintf(buf, sizeof(buf), "%02X:%02X:%02X:%02X:%02X:%02X", _mac.bytes[0], _mac.bytes[1], _mac.bytes[2], _mac.bytes[3], _mac.bytes[4], _mac.bytes[5]);
   } else {
-    snprintf(buf, sizeof(buf), "%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X",
-             _mac.bytes[0], _mac.bytes[1], _mac.bytes[2],
-             _mac.bytes[3], _mac.bytes[4], _mac.bytes[5],
-             _mac.bytes[6], _mac.bytes[7]);
+    snprintf(
+      buf, sizeof(buf), "%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X", _mac.bytes[0], _mac.bytes[1], _mac.bytes[2], _mac.bytes[3], _mac.bytes[4], _mac.bytes[5],
+      _mac.bytes[6], _mac.bytes[7]
+    );
   }
   return String(buf);
 }

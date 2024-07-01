@@ -176,13 +176,10 @@ void disableCore1WDT() {
 }
 #endif
 
-BaseType_t xTaskCreateUniversal(TaskFunction_t pxTaskCode,
-                                const char *const pcName,
-                                const uint32_t usStackDepth,
-                                void *const pvParameters,
-                                UBaseType_t uxPriority,
-                                TaskHandle_t *const pxCreatedTask,
-                                const BaseType_t xCoreID) {
+BaseType_t xTaskCreateUniversal(
+  TaskFunction_t pxTaskCode, const char *const pcName, const uint32_t usStackDepth, void *const pvParameters, UBaseType_t uxPriority,
+  TaskHandle_t *const pxCreatedTask, const BaseType_t xCoreID
+) {
 #ifndef CONFIG_FREERTOS_UNICORE
   if (xCoreID >= 0 && xCoreID < 2) {
     return xTaskCreatePinnedToCore(pxTaskCode, pcName, usStackDepth, pvParameters, uxPriority, pxCreatedTask, xCoreID);
@@ -255,9 +252,6 @@ extern bool btInUse();
 void initArduino() {
   //init proper ref tick value for PLL (uncomment if REF_TICK is different than 1MHz)
   //ESP_REG(APB_CTRL_PLL_TICK_CONF_REG) = APB_CLK_FREQ / REF_CLK_FREQ - 1;
-#ifdef F_CPU
-  setCpuFrequencyMhz(F_CPU / 1000000);
-#endif
 #if CONFIG_SPIRAM_SUPPORT || CONFIG_SPIRAM
   psramInit();
 #endif
@@ -356,7 +350,7 @@ static void handle_custom_backtrace(panic_info_t *info) {
 
 #if CONFIG_IDF_TARGET_ARCH_XTENSA
   XtExcFrame *xt_frame = (XtExcFrame *)info->frame;
-  esp_backtrace_frame_t stk_frame = { .pc = xt_frame->pc, .sp = xt_frame->a1, .next_pc = xt_frame->a0, .exc_frame = xt_frame };
+  esp_backtrace_frame_t stk_frame = {.pc = xt_frame->pc, .sp = xt_frame->a1, .next_pc = xt_frame->a0, .exc_frame = xt_frame};
   uint32_t i = 100, pc_ptr = esp_cpu_process_stack_pc(stk_frame.pc);
   p_info.backtrace[p_info.backtrace_len++] = pc_ptr;
 

@@ -17,6 +17,16 @@
 #include "hal/gpio_hal.h"
 #include "soc/soc_caps.h"
 
+// RGB_BUILTIN is defined in pins_arduino.h
+// If RGB_BUILTIN is defined, it will be used as a pin number for the RGB LED
+// If RGB_BUILTIN has a side effect that prevents using RMT Legacy driver in IDF 5.1
+// Define ESP32_ARDUINO_NO_RGB_BUILTIN in build_opt.h or through CLI to disable RGB_BUILTIN
+#ifdef ESP32_ARDUINO_NO_RGB_BUILTIN
+#ifdef RGB_BUILTIN
+#undef RGB_BUILTIN
+#endif
+#endif
+
 // It fixes lack of pin definition for S3 and for any future SoC
 // this function works for ESP32, ESP32-S2 and ESP32-S3 - including the C3, it will return -1 for any pin
 #if SOC_TOUCH_SENSOR_NUM > 0
@@ -75,10 +85,10 @@ int8_t analogChannelToDigitalPin(uint8_t channel) {
 #endif
 
 typedef void (*voidFuncPtr)(void);
-typedef void (*voidFuncPtrArg)(void*);
+typedef void (*voidFuncPtrArg)(void *);
 typedef struct {
   voidFuncPtr fn;
-  void* arg;
+  void *arg;
   bool functional;
 } InterruptHandle_t;
 static InterruptHandle_t __pinInterruptHandlers[SOC_GPIO_PIN_COUNT] = {
@@ -87,7 +97,7 @@ static InterruptHandle_t __pinInterruptHandlers[SOC_GPIO_PIN_COUNT] = {
 
 #include "driver/rtc_io.h"
 
-static bool gpioDetachBus(void* bus) {
+static bool gpioDetachBus(void *bus) {
   return true;
 }
 
@@ -139,7 +149,7 @@ extern void ARDUINO_ISR_ATTR __pinMode(uint8_t pin, uint8_t mode) {
     return;
   }
   if (perimanGetPinBus(pin, ESP32_BUS_TYPE_GPIO) == NULL) {
-    if (!perimanSetPinBus(pin, ESP32_BUS_TYPE_GPIO, (void*)(pin + 1), -1, -1)) {
+    if (!perimanSetPinBus(pin, ESP32_BUS_TYPE_GPIO, (void *)(pin + 1), -1, -1)) {
       //gpioDetachBus((void *)(pin+1));
       return;
     }
@@ -159,7 +169,7 @@ extern void ARDUINO_ISR_ATTR __digitalWrite(uint8_t pin, uint8_t val) {
     neopixelWrite(RGB_BUILTIN, comm_val, comm_val, comm_val);
     return;
   }
-#endif
+#endif  // RGB_BUILTIN
   if (perimanGetPinBus(pin, ESP32_BUS_TYPE_GPIO) != NULL) {
     gpio_set_level((gpio_num_t)pin, val);
   } else {
@@ -182,8 +192,8 @@ extern int ARDUINO_ISR_ATTR __digitalRead(uint8_t pin) {
   }
 }
 
-static void ARDUINO_ISR_ATTR __onPinInterrupt(void* arg) {
-  InterruptHandle_t* isr = (InterruptHandle_t*)arg;
+static void ARDUINO_ISR_ATTR __onPinInterrupt(void *arg) {
+  InterruptHandle_t *isr = (InterruptHandle_t *)arg;
   if (isr->fn) {
     if (isr->arg) {
       ((voidFuncPtrArg)isr->fn)(isr->arg);
@@ -193,13 +203,15 @@ static void ARDUINO_ISR_ATTR __onPinInterrupt(void* arg) {
   }
 }
 
-extern void cleanupFunctional(void* arg);
+extern void cleanupFunctional(void *arg);
 
-extern void __attachInterruptFunctionalArg(uint8_t pin, voidFuncPtrArg userFunc, void* arg, int intr_type, bool functional) {
+extern void __attachInterruptFunctionalArg(uint8_t pin, voidFuncPtrArg userFunc, void *arg, int intr_type, bool functional) {
   static bool interrupt_initialized = false;
 
   // makes sure that pin -1 (255) will never work -- this follows Arduino standard
-  if (pin >= SOC_GPIO_PIN_COUNT) return;
+  if (pin >= SOC_GPIO_PIN_COUNT) {
+    return;
+  }
 
   if (!interrupt_initialized) {
     esp_err_t err = gpio_install_isr_service((int)ARDUINO_ISR_FLAG);
@@ -224,7 +236,6 @@ extern void __attachInterruptFunctionalArg(uint8_t pin, voidFuncPtrArg userFunc,
   }
   gpio_isr_handler_add((gpio_num_t)pin, __onPinInterrupt, &__pinInterruptHandlers[pin]);
 
-
   //FIX interrupts on peripherals outputs (eg. LEDC,...)
   //Enable input in GPIO register
   gpio_hal_context_t gpiohal;
@@ -232,7 +243,7 @@ extern void __attachInterruptFunctionalArg(uint8_t pin, voidFuncPtrArg userFunc,
   gpio_hal_input_enable(&gpiohal, pin);
 }
 
-extern void __attachInterruptArg(uint8_t pin, voidFuncPtrArg userFunc, void* arg, int intr_type) {
+extern void __attachInterruptArg(uint8_t pin, voidFuncPtrArg userFunc, void *arg, int intr_type) {
   __attachInterruptFunctionalArg(pin, userFunc, arg, intr_type, false);
 }
 
@@ -262,10 +273,9 @@ extern void disableInterrupt(uint8_t pin) {
   gpio_intr_disable((gpio_num_t)pin);
 }
 
-
 extern void pinMode(uint8_t pin, uint8_t mode) __attribute__((weak, alias("__pinMode")));
 extern void digitalWrite(uint8_t pin, uint8_t val) __attribute__((weak, alias("__digitalWrite")));
 extern int digitalRead(uint8_t pin) __attribute__((weak, alias("__digitalRead")));
 extern void attachInterrupt(uint8_t pin, voidFuncPtr handler, int mode) __attribute__((weak, alias("__attachInterrupt")));
-extern void attachInterruptArg(uint8_t pin, voidFuncPtrArg handler, void* arg, int mode) __attribute__((weak, alias("__attachInterruptArg")));
+extern void attachInterruptArg(uint8_t pin, voidFuncPtrArg handler, void *arg, int mode) __attribute__((weak, alias("__attachInterruptArg")));
 extern void detachInterrupt(uint8_t pin) __attribute__((weak, alias("__detachInterrupt")));

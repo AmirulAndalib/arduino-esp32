@@ -8,45 +8,44 @@
 #include "MD5Builder.h"
 #include "Update.h"
 
-
 // #define OTA_DEBUG Serial
 
 ArduinoOTAClass::ArduinoOTAClass()
-  : _port(0), _initialized(false), _rebootOnSuccess(true), _mdnsEnabled(true), _state(OTA_IDLE), _size(0), _cmd(0), _ota_port(0), _ota_timeout(1000), _start_callback(NULL), _end_callback(NULL), _error_callback(NULL), _progress_callback(NULL) {
-}
+  : _port(0), _initialized(false), _rebootOnSuccess(true), _mdnsEnabled(true), _state(OTA_IDLE), _size(0), _cmd(0), _ota_port(0), _ota_timeout(1000),
+    _start_callback(NULL), _end_callback(NULL), _error_callback(NULL), _progress_callback(NULL) {}
 
 ArduinoOTAClass::~ArduinoOTAClass() {
   _udp_ota.stop();
 }
 
-ArduinoOTAClass& ArduinoOTAClass::onStart(THandlerFunction fn) {
+ArduinoOTAClass &ArduinoOTAClass::onStart(THandlerFunction fn) {
   _start_callback = fn;
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::onEnd(THandlerFunction fn) {
+ArduinoOTAClass &ArduinoOTAClass::onEnd(THandlerFunction fn) {
   _end_callback = fn;
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::onProgress(THandlerFunction_Progress fn) {
+ArduinoOTAClass &ArduinoOTAClass::onProgress(THandlerFunction_Progress fn) {
   _progress_callback = fn;
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::onError(THandlerFunction_Error fn) {
+ArduinoOTAClass &ArduinoOTAClass::onError(THandlerFunction_Error fn) {
   _error_callback = fn;
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setPort(uint16_t port) {
+ArduinoOTAClass &ArduinoOTAClass::setPort(uint16_t port) {
   if (!_initialized && !_port && port) {
     _port = port;
   }
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setHostname(const char* hostname) {
+ArduinoOTAClass &ArduinoOTAClass::setHostname(const char *hostname) {
   if (!_initialized && !_hostname.length() && hostname) {
     _hostname = hostname;
   }
@@ -57,26 +56,29 @@ String ArduinoOTAClass::getHostname() {
   return _hostname;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setPassword(const char* password) {
-  if (!_initialized && !_password.length() && password) {
+ArduinoOTAClass &ArduinoOTAClass::setPassword(const char *password) {
+  if (_state == OTA_IDLE && password) {
     MD5Builder passmd5;
     passmd5.begin();
     passmd5.add(password);
     passmd5.calculate();
+    _password.clear();
     _password = passmd5.toString();
   }
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setPasswordHash(const char* password) {
-  if (!_initialized && !_password.length() && password) {
+ArduinoOTAClass &ArduinoOTAClass::setPasswordHash(const char *password) {
+  if (_state == OTA_IDLE && password) {
+    _password.clear();
     _password = password;
   }
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setPartitionLabel(const char* partition_label) {
-  if (!_initialized && !_partition_label.length() && partition_label) {
+ArduinoOTAClass &ArduinoOTAClass::setPartitionLabel(const char *partition_label) {
+  if (_state == OTA_IDLE && partition_label) {
+    _partition_label.clear();
     _partition_label = partition_label;
   }
   return *this;
@@ -86,12 +88,12 @@ String ArduinoOTAClass::getPartitionLabel() {
   return _partition_label;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setRebootOnSuccess(bool reboot) {
+ArduinoOTAClass &ArduinoOTAClass::setRebootOnSuccess(bool reboot) {
   _rebootOnSuccess = reboot;
   return *this;
 }
 
-ArduinoOTAClass& ArduinoOTAClass::setMdnsEnabled(bool enabled) {
+ArduinoOTAClass &ArduinoOTAClass::setMdnsEnabled(bool enabled) {
   _mdnsEnabled = enabled;
   return *this;
 }
@@ -110,7 +112,6 @@ void ArduinoOTAClass::begin() {
     log_e("udp bind failed");
     return;
   }
-
 
   if (!_hostname.length()) {
     char tmp[20];
@@ -132,7 +133,9 @@ int ArduinoOTAClass::parseInt() {
   char data[INT_BUFFER_SIZE];
   uint8_t index = 0;
   char value;
-  while (_udp_ota.peek() == ' ') _udp_ota.read();
+  while (_udp_ota.peek() == ' ') {
+    _udp_ota.read();
+  }
   while (index < INT_BUFFER_SIZE - 1) {
     value = _udp_ota.peek();
     if (value < '0' || value > '9') {
@@ -160,8 +163,9 @@ String ArduinoOTAClass::readStringUntil(char end) {
 void ArduinoOTAClass::_onRx() {
   if (_state == OTA_IDLE) {
     int cmd = parseInt();
-    if (cmd != U_FLASH && cmd != U_SPIFFS)
+    if (cmd != U_FLASH && cmd != U_SPIFFS) {
       return;
+    }
     _cmd = cmd;
     _ota_port = parseInt();
     _size = parseInt();
@@ -226,14 +230,16 @@ void ArduinoOTAClass::_onRx() {
       _udp_ota.print("Authentication Failed");
       log_w("Authentication Failed");
       _udp_ota.endPacket();
-      if (_error_callback) _error_callback(OTA_AUTH_ERROR);
+      if (_error_callback) {
+        _error_callback(OTA_AUTH_ERROR);
+      }
       _state = OTA_IDLE;
     }
   }
 }
 
 void ArduinoOTAClass::_runUpdate() {
-  const char* partition_label = _partition_label.length() ? _partition_label.c_str() : NULL;
+  const char *partition_label = _partition_label.length() ? _partition_label.c_str() : NULL;
   if (!Update.begin(_size, _cmd, -1, LOW, partition_label)) {
 
     log_e("Begin ERROR: %s", Update.errorString());
