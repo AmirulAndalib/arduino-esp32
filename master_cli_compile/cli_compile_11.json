@@ -983,7 +983,7 @@
                     },
 {"name": "libraries/WebServer/examples/SimpleAuthentification",
                     "sizes": [{
-                            "flash_bytes": 965255,
+                            "flash_bytes": 965271,
                             "flash_percentage": 73,
                             "ram_bytes": 45108,
                             "ram_percentage": 13
