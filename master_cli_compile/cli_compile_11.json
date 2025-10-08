@@ -1007,7 +1007,7 @@
                     },
 {"name": "libraries/WebServer/examples/WebUpdate",
                     "sizes": [{
-                            "flash_bytes": 987619,
+                            "flash_bytes": 987603,
                             "flash_percentage": 75,
                             "ram_bytes": 47684,
                             "ram_percentage": 14
