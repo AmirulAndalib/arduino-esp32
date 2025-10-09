@@ -467,7 +467,7 @@
                     },
 {"name": "libraries/Matter/examples/MatterFan",
                     "sizes": [{
-                            "flash_bytes": 1657310,
+                            "flash_bytes": 1657302,
                             "flash_percentage": 52,
                             "ram_bytes": 92632,
                             "ram_percentage": 28
@@ -951,7 +951,7 @@
                     },
 {"name": "libraries/HTTPClient/examples/CustomHeaders",
                     "sizes": [{
-                            "flash_bytes": 1037239,
+                            "flash_bytes": 1037255,
                             "flash_percentage": 79,
                             "ram_bytes": 46548,
                             "ram_percentage": 14
