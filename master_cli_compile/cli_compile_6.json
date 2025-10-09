@@ -435,7 +435,7 @@
                     },
 {"name": "libraries/Matter/examples/MatterContactSensor",
                     "sizes": [{
-                            "flash_bytes": 1644218,
+                            "flash_bytes": 1644210,
                             "flash_percentage": 52,
                             "ram_bytes": 92400,
                             "ram_percentage": 28
@@ -467,7 +467,7 @@
                     },
 {"name": "libraries/Matter/examples/MatterFan",
                     "sizes": [{
-                            "flash_bytes": 1657302,
+                            "flash_bytes": 1657310,
                             "flash_percentage": 52,
                             "ram_bytes": 92632,
                             "ram_percentage": 28
