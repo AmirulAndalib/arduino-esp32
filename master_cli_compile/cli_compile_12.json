@@ -145,8 +145,8 @@
                 "sketches": [
 {"name": "libraries/WebServer/examples/SDWebServer",
                     "sizes": [{
-                            "flash_bytes": 969908,
-                            "flash_percentage": 73,
+                            "flash_bytes": 969936,
+                            "flash_percentage": 74,
                             "ram_bytes": 33680,
                             "ram_percentage": 10
                             }]
@@ -161,7 +161,7 @@
                     },
 {"name": "libraries/WebServer/examples/UploadHugeFile",
                     "sizes": [{
-                            "flash_bytes": 1216972,
+                            "flash_bytes": 1217000,
                             "flash_percentage": 38,
                             "ram_bytes": 36576,
                             "ram_percentage": 11
@@ -169,7 +169,7 @@
                     },
 {"name": "libraries/WebServer/examples/WebServer",
                     "sizes": [{
-                            "flash_bytes": 981648,
+                            "flash_bytes": 981676,
                             "flash_percentage": 74,
                             "ram_bytes": 31512,
                             "ram_percentage": 9
@@ -262,7 +262,7 @@
                 "sketches": [
 {"name": "libraries/WebServer/examples/UploadHugeFile",
                     "sizes": [{
-                            "flash_bytes": 1261015,
+                            "flash_bytes": 1261047,
                             "flash_percentage": 40,
                             "ram_bytes": 50364,
                             "ram_percentage": 15
@@ -270,7 +270,7 @@
                     },
 {"name": "libraries/WebServer/examples/WebServer",
                     "sizes": [{
-                            "flash_bytes": 995499,
+                            "flash_bytes": 995531,
                             "flash_percentage": 75,
                             "ram_bytes": 45384,
                             "ram_percentage": 13
@@ -451,7 +451,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiExtender",
                     "sizes": [{
-                            "flash_bytes": 823138,
+                            "flash_bytes": 823146,
                             "flash_percentage": 62,
                             "ram_bytes": 38692,
                             "ram_percentage": 11
@@ -475,7 +475,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiMultiAdvanced",
                     "sizes": [{
-                            "flash_bytes": 960794,
+                            "flash_bytes": 960806,
                             "flash_percentage": 73,
                             "ram_bytes": 40508,
                             "ram_percentage": 12
@@ -624,7 +624,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiMultiAdvanced",
                     "sizes": [{
-                            "flash_bytes": 1071196,
+                            "flash_bytes": 1071176,
                             "flash_percentage": 81,
                             "ram_bytes": 35664,
                             "ram_percentage": 10
@@ -1007,7 +1007,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiMultiAdvanced",
                     "sizes": [{
-                            "flash_bytes": 1037763,
+                            "flash_bytes": 1037771,
                             "flash_percentage": 79,
                             "ram_bytes": 46596,
                             "ram_percentage": 14
