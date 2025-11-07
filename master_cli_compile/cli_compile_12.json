@@ -132,9 +132,9 @@
                     },
 {"name": "libraries/Zigbee/examples/Zigbee_Contact_Switch",
                     "sizes": [{
-                            "flash_bytes": 629544,
+                            "flash_bytes": 631706,
                             "flash_percentage": 48,
-                            "ram_bytes": 33916,
+                            "ram_bytes": 33924,
                             "ram_percentage": 10
                             }]
                     }
@@ -475,7 +475,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiMultiAdvanced",
                     "sizes": [{
-                            "flash_bytes": 961166,
+                            "flash_bytes": 961174,
                             "flash_percentage": 73,
                             "ram_bytes": 40524,
                             "ram_percentage": 12
