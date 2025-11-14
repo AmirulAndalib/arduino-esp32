@@ -1007,7 +1007,7 @@
                     },
 {"name": "libraries/SD_MMC/examples/SDMMC_time",
                     "sizes": [{
-                            "flash_bytes": 990475,
+                            "flash_bytes": 990459,
                             "flash_percentage": 75,
                             "ram_bytes": 46176,
                             "ram_percentage": 14
