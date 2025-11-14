@@ -419,7 +419,7 @@
                     },
 {"name": "libraries/Update/examples/AWS_S3_OTA_Update",
                     "sizes": [{
-                            "flash_bytes": 860398,
+                            "flash_bytes": 860390,
                             "flash_percentage": 65,
                             "ram_bytes": 40856,
                             "ram_percentage": 12
@@ -451,7 +451,7 @@
                     },
 {"name": "libraries/Update/examples/OTAWebUpdater",
                     "sizes": [{
-                            "flash_bytes": 928210,
+                            "flash_bytes": 928202,
                             "flash_percentage": 70,
                             "ram_bytes": 43512,
                             "ram_percentage": 13

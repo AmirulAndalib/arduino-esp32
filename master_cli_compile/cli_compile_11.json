@@ -499,7 +499,7 @@
                     },
 {"name": "libraries/WiFi/examples/FTM/FTM_Responder",
                     "sizes": [{
-                            "flash_bytes": 819890,
+                            "flash_bytes": 819898,
                             "flash_percentage": 62,
                             "ram_bytes": 39172,
                             "ram_percentage": 11
