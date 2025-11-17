@@ -382,7 +382,7 @@
                     },
 {"name": "libraries/Matter/examples/MatterComposedLights",
                     "sizes": [{
-                            "flash_bytes": 1846511,
+                            "flash_bytes": 1846495,
                             "flash_percentage": 58,
                             "ram_bytes": 113388,
                             "ram_percentage": 34
@@ -983,7 +983,7 @@
                     },
 {"name": "libraries/HTTPClient/examples/StreamHttpClient",
                     "sizes": [{
-                            "flash_bytes": 1039323,
+                            "flash_bytes": 1039307,
                             "flash_percentage": 79,
                             "ram_bytes": 47196,
                             "ram_percentage": 14
