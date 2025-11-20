@@ -145,7 +145,7 @@
                 "sketches": [
 {"name": "libraries/NetworkClientSecure/examples/WiFiClientShowPeerCredentials",
                     "sizes": [{
-                            "flash_bytes": 1007406,
+                            "flash_bytes": 1007386,
                             "flash_percentage": 76,
                             "ram_bytes": 31292,
                             "ram_percentage": 9
@@ -153,7 +153,7 @@
                     },
 {"name": "libraries/NetworkClientSecure/examples/WiFiClientTrustOnFirstUse",
                     "sizes": [{
-                            "flash_bytes": 985328,
+                            "flash_bytes": 985308,
                             "flash_percentage": 75,
                             "ram_bytes": 31348,
                             "ram_percentage": 9
@@ -169,7 +169,7 @@
                     },
 {"name": "libraries/PPP/examples/PPP_WIFI_BRIDGE",
                     "sizes": [{
-                            "flash_bytes": 901006,
+                            "flash_bytes": 900986,
                             "flash_percentage": 68,
                             "ram_bytes": 29600,
                             "ram_percentage": 9
@@ -201,7 +201,7 @@
                     },
 {"name": "libraries/SD/examples/SD_time",
                     "sizes": [{
-                            "flash_bytes": 893154,
+                            "flash_bytes": 893134,
                             "flash_percentage": 68,
                             "ram_bytes": 30928,
                             "ram_percentage": 9
@@ -209,9 +209,9 @@
                     },
 {"name": "libraries/SD_MMC/examples/SD2USBMSC",
                     "sizes": [{
-                            "flash_bytes": 465854,
+                            "flash_bytes": 466952,
                             "flash_percentage": 35,
-                            "ram_bytes": 57312,
+                            "ram_bytes": 57248,
                             "ram_percentage": 17
                             }]
                     },
@@ -225,7 +225,7 @@
                     },
 {"name": "libraries/SD_MMC/examples/SDMMC_time",
                     "sizes": [{
-                            "flash_bytes": 891102,
+                            "flash_bytes": 891082,
                             "flash_percentage": 67,
                             "ram_bytes": 30964,
                             "ram_percentage": 9
@@ -249,7 +249,7 @@
                     },
 {"name": "libraries/SPIFFS/examples/SPIFFS_time",
                     "sizes": [{
-                            "flash_bytes": 882876,
+                            "flash_bytes": 882856,
                             "flash_percentage": 67,
                             "ram_bytes": 30796,
                             "ram_percentage": 9
@@ -515,17 +515,17 @@
                     },
 {"name": "libraries/USB/examples/CompositeDevice",
                     "sizes": [{
-                            "flash_bytes": 353942,
+                            "flash_bytes": 354870,
                             "flash_percentage": 27,
-                            "ram_bytes": 39080,
+                            "ram_bytes": 39072,
                             "ram_percentage": 11
                             }]
                     },
 {"name": "libraries/USB/examples/ConsumerControl",
                     "sizes": [{
-                            "flash_bytes": 307206,
+                            "flash_bytes": 308126,
                             "flash_percentage": 23,
-                            "ram_bytes": 38632,
+                            "ram_bytes": 38624,
                             "ram_percentage": 11
                             }]
                     }

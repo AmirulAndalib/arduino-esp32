@@ -262,25 +262,25 @@
                 "sketches": [
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 1009371,
+                            "flash_bytes": 1009451,
                             "flash_percentage": 6,
-                            "ram_bytes": 66308,
+                            "ram_bytes": 66324,
                             "ram_percentage": 20
                             }]
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 1012283,
+                            "flash_bytes": 1012363,
                             "flash_percentage": 6,
-                            "ram_bytes": 66396,
+                            "ram_bytes": 66412,
                             "ram_percentage": 20
                             }]
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 1014543,
+                            "flash_bytes": 1014623,
                             "flash_percentage": 6,
-                            "ram_bytes": 66780,
+                            "ram_bytes": 66796,
                             "ram_percentage": 20
                             }]
                     },
@@ -983,7 +983,7 @@
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 1052719,
+                            "flash_bytes": 1052791,
                             "flash_percentage": 6,
                             "ram_bytes": 68072,
                             "ram_percentage": 20
@@ -991,9 +991,9 @@
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 1066383,
+                            "flash_bytes": 1066471,
                             "flash_percentage": 6,
-                            "ram_bytes": 68148,
+                            "ram_bytes": 68164,
                             "ram_percentage": 20
                             }]
                     },

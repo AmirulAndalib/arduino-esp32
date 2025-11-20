@@ -177,7 +177,7 @@
                     },
 {"name": "libraries/DNSServer/examples/CaptivePortal",
                     "sizes": [{
-                            "flash_bytes": 880400,
+                            "flash_bytes": 880380,
                             "flash_percentage": 67,
                             "ram_bytes": 31136,
                             "ram_percentage": 9
@@ -427,15 +427,15 @@
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 983518,
+                            "flash_bytes": 983598,
                             "flash_percentage": 5,
-                            "ram_bytes": 62636,
+                            "ram_bytes": 62652,
                             "ram_percentage": 19
                             }]
                     },
 {"name": "libraries/ESP32/examples/Camera/CameraWebServer",
                     "sizes": [{
-                            "flash_bytes": 987334,
+                            "flash_bytes": 987398,
                             "flash_percentage": 5,
                             "ram_bytes": 62672,
                             "ram_percentage": 19

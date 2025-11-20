@@ -145,7 +145,7 @@
                 "sketches": [
 {"name": "libraries/ESP32/examples/Time/SimpleTime",
                     "sizes": [{
-                            "flash_bytes": 852586,
+                            "flash_bytes": 852566,
                             "flash_percentage": 65,
                             "ram_bytes": 30764,
                             "ram_percentage": 9
@@ -225,7 +225,7 @@
                     },
 {"name": "libraries/ESPmDNS/examples/mDNS-SD_Extended",
                     "sizes": [{
-                            "flash_bytes": 853896,
+                            "flash_bytes": 853876,
                             "flash_percentage": 65,
                             "ram_bytes": 31680,
                             "ram_percentage": 9
@@ -233,7 +233,7 @@
                     },
 {"name": "libraries/ESPmDNS/examples/mDNS_Web_Server",
                     "sizes": [{
-                            "flash_bytes": 882678,
+                            "flash_bytes": 882658,
                             "flash_percentage": 67,
                             "ram_bytes": 32988,
                             "ram_percentage": 10
