@@ -523,7 +523,7 @@
                     },
 {"name": "libraries/WiFi/examples/WiFiAccessPoint",
                     "sizes": [{
-                            "flash_bytes": 856230,
+                            "flash_bytes": 856222,
                             "flash_percentage": 65,
                             "ram_bytes": 40600,
                             "ram_percentage": 12

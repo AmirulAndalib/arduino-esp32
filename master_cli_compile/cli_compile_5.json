@@ -427,7 +427,7 @@
                     },
 {"name": "libraries/HTTPUpdate/examples/httpUpdateSPIFFS",
                     "sizes": [{
-                            "flash_bytes": 904998,
+                            "flash_bytes": 904990,
                             "flash_percentage": 69,
                             "ram_bytes": 41120,
                             "ram_percentage": 12
