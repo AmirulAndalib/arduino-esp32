@@ -390,7 +390,7 @@
                     },
 {"name": "libraries/NetBIOS/examples/ESP_NBNST",
                     "sizes": [{
-                            "flash_bytes": 857723,
+                            "flash_bytes": 857707,
                             "flash_percentage": 65,
                             "ram_bytes": 43316,
                             "ram_percentage": 13
