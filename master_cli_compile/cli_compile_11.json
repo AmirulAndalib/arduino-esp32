@@ -818,7 +818,7 @@
                     },
 {"name": "libraries/WebServer/examples/Filters",
                     "sizes": [{
-                            "flash_bytes": 978647,
+                            "flash_bytes": 978663,
                             "flash_percentage": 74,
                             "ram_bytes": 48060,
                             "ram_percentage": 14
